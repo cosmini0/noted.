@@ -165,6 +165,32 @@
         .subtle-link:hover {
             opacity: 0.8;
         }
+        
+        .features-section {
+            display: none;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .feature-column {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-list {
+            flex: 1;
+        }
+        
+        .feature-list h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -175,10 +201,38 @@
             <a href="https://chrome.google.com/webstore/detail/your-extension-id" class="cta">Get Extension</a>
             
             <nav id="home-nav">
+                <button class="show-policy" onclick="showPolicy('features')">Features</button> ·
                 <button class="show-policy" onclick="showPolicy('refund')">Refund</button> ·
                 <button class="show-policy" onclick="showPolicy('terms')">Terms</button> ·
                 <button class="show-policy" onclick="showPolicy('privacy')">Privacy</button>
             </nav>
+            
+            <div id="features" class="policy-section">
+                <h3>Premium Features</h3>
+                <p>Upgrade to premium for $2.99 (one-time payment) to unlock the full potential of noted.</p>
+                <div class="feature-column">
+                    <div class="feature-list">
+                        <h4>Free</h4>
+                        <ul>
+                            <li>Up to 10 notes</li>
+                            <li>Basic organization</li>
+                            <li>Tag support</li>
+                            <li>Search functionality</li>
+                        </ul>
+                    </div>
+                    <div class="feature-list">
+                        <h4>Premium</h4>
+                        <ul>
+                            <li>Unlimited notes</li>
+                            <li>Copy note content</li>
+                            <li>Export notes</li>
+                            <li>Filter by website</li>
+                            <li>Web page highlights</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 1.5rem;">You can also purchase premium as a way to support further development if you enjoy using noted.</p>
+            </div>
             
             <div id="refund" class="policy-section">
                 <h3>Refund Policy</h3>
