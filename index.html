@@ -60,22 +60,6 @@
             font-size: 1.2rem;
         }
         
-        #home-nav {
-            margin-top: 3rem;
-        }
-        
-        #home-nav a {
-            color: var(--text);
-            text-decoration: none;
-            margin: 0 1rem;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-        }
-        
-        #home-nav a:hover {
-            color: var(--accent);
-        }
-        
         .cta {
             display: inline-block;
             color: var(--bg);
@@ -90,6 +74,61 @@
         
         .cta:hover {
             opacity: 0.9;
+        }
+        
+        #home-nav {
+            margin-top: 3rem;
+        }
+        
+        .show-policy {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+            margin: 0 0.5rem;
+        }
+        
+        .show-policy:hover {
+            text-decoration: underline;
+        }
+        
+        .policy-section {
+            display: none;
+            text-align: left;
+            background-color: rgba(25, 25, 25, 0.7);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        
+        .policy-section.visible {
+            opacity: 1;
+        }
+        
+        .policy-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        
+        .policy-section p, .policy-section li {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .policy-section ul {
+            list-style: none;
+            margin-bottom: 0.8rem;
+            padding-left: 0;
+        }
+        
+        .policy-section li {
+            padding-bottom: 0.5rem;
         }
         
         #home-footer {
@@ -109,61 +148,6 @@
             color: var(--accent);
         }
         
-        .policy-section {
-            display: none;
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        
-        .policy-section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .policy-section h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-        
-        .policy-section p, .policy-section li {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .policy-section ul {
-            list-style: none;
-            padding-left: 1rem;
-        }
-        
-        .policy-section ul li::before {
-            content: "›";
-            color: var(--accent);
-            display: inline-block;
-            width: 1rem;
-            margin-left: -1rem;
-        }
-        
-        .show-policy {
-            cursor: pointer;
-            color: var(--accent);
-            font-size: 0.9rem;
-            background: none;
-            border: none;
-            margin: 0 0.5rem;
-        }
-        
-        .show-policy:hover {
-            text-decoration: underline;
-        }
-        
         .subtle-link {
             opacity: 0.5;
             font-size: 0.8rem;
@@ -174,64 +158,33 @@
             opacity: 0.8;
         }
         
-        .feature-cards {
+        .features-grid {
             display: flex;
-            justify-content: space-between;
             gap: 1.5rem;
             margin-top: 1.5rem;
         }
         
-        .feature-card {
+        .feature-col {
             flex: 1;
-            background: rgba(0,0,0,0.2);
-            border-radius: 8px;
-            padding: 1.5rem;
-            border: 1px solid var(--subtle);
         }
         
-        .feature-card.premium {
-            border-color: var(--accent);
-            background: rgba(187, 134, 252, 0.05);
-        }
-        
-        .feature-card h4 {
+        .feature-col h4 {
             color: var(--text);
+            padding-bottom: 0.5rem;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-            font-weight: 500;
-            letter-spacing: 0.02em;
+            border-bottom: 1px solid var(--subtle);
         }
         
-        .feature-card.premium h4 {
+        .premium-col h4 {
             color: var(--accent);
+            border-bottom-color: var(--accent);
         }
         
-        .feature-card li {
-            margin-bottom: 0.7rem;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .feature-card li:before {
-            content: "";
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            margin-right: 0.6rem;
-            border-radius: 50%;
-            background-color: var(--secondary);
-        }
-        
-        .feature-card.premium li:before {
-            background-color: var(--accent);
-        }
-        
-        .supporting-text {
-            margin-top: 1.8rem;
+        .note {
+            margin-top: 1.5rem;
             font-style: italic;
             color: var(--secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -253,8 +206,8 @@
                 <h3>Premium Features</h3>
                 <p>Enhance your note-taking with premium features for a one-time $2.99 payment.</p>
                 
-                <div class="feature-cards">
-                    <div class="feature-card">
+                <div class="features-grid">
+                    <div class="feature-col">
                         <h4>Free</h4>
                         <ul>
                             <li>Up to 10 notes</li>
@@ -264,7 +217,7 @@
                         </ul>
                     </div>
                     
-                    <div class="feature-card premium">
+                    <div class="feature-col premium-col">
                         <h4>Premium</h4>
                         <ul>
                             <li>Unlimited notes</li>
@@ -276,7 +229,7 @@
                     </div>
                 </div>
                 
-                <p class="supporting-text">Your purchase also supports the continued development of noted.</p>
+                <p class="note">Your purchase also supports the continued development of noted.</p>
             </div>
             
             <div id="refund" class="policy-section">
@@ -308,28 +261,26 @@
     
     <script>
         function showPolicy(id) {
-            // Hide all policies with animation
+            // Hide all policies
             document.querySelectorAll('.policy-section').forEach(el => {
-                el.classList.remove('active');
-                
-                // Use timeout to wait for fade out before hiding
+                el.classList.remove('visible');
                 setTimeout(() => {
-                    if (!el.classList.contains('active')) {
+                    if (!el.classList.contains('visible')) {
                         el.style.display = 'none';
                     }
-                }, 400);
+                }, 300);
             });
             
-            // Show the selected policy with animation
+            // Show selected policy
             const selectedPolicy = document.getElementById(id);
             selectedPolicy.style.display = 'block';
             
-            // Trigger reflow for animation to work
+            // Force reflow
             void selectedPolicy.offsetWidth;
             
-            // Add active class for animation
+            // Add visible class
             setTimeout(() => {
-                selectedPolicy.classList.add('active');
+                selectedPolicy.classList.add('visible');
             }, 10);
         }
     </script>
