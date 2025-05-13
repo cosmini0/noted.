@@ -60,6 +60,22 @@
             font-size: 1.2rem;
         }
         
+        #home-nav {
+            margin-top: 3rem;
+        }
+        
+        #home-nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        #home-nav a:hover {
+            color: var(--accent);
+        }
+        
         .cta {
             display: inline-block;
             color: var(--bg);
@@ -74,61 +90,6 @@
         
         .cta:hover {
             opacity: 0.9;
-        }
-        
-        #home-nav {
-            margin-top: 3rem;
-        }
-        
-        .show-policy {
-            cursor: pointer;
-            color: var(--accent);
-            font-size: 0.9rem;
-            background: none;
-            border: none;
-            margin: 0 0.5rem;
-        }
-        
-        .show-policy:hover {
-            text-decoration: underline;
-        }
-        
-        .policy-section {
-            display: none;
-            text-align: left;
-            background-color: rgba(25, 25, 25, 0.7);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-        
-        .policy-section.visible {
-            opacity: 1;
-        }
-        
-        .policy-section h3 {
-            color: var(--accent);
-            margin-bottom: 1.2rem;
-            font-weight: 500;
-            font-size: 1.2rem;
-        }
-        
-        .policy-section p, .policy-section li {
-            color: var(--secondary);
-            font-size: 0.95rem;
-            margin-bottom: 0.8rem;
-        }
-        
-        .policy-section ul {
-            list-style: none;
-            margin-bottom: 0.8rem;
-            padding-left: 0;
-        }
-        
-        .policy-section li {
-            padding-bottom: 0.5rem;
         }
         
         #home-footer {
@@ -148,6 +109,53 @@
             color: var(--accent);
         }
         
+        .policy-section {
+            display: none;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .policy-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .policy-section p, .policy-section li {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .policy-section ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        
+        .policy-section ul li::before {
+            content: "›";
+            color: var(--accent);
+            display: inline-block;
+            width: 1rem;
+            margin-left: -1rem;
+        }
+        
+        .show-policy {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+            margin: 0 0.5rem;
+        }
+        
+        .show-policy:hover {
+            text-decoration: underline;
+        }
+        
         .subtle-link {
             opacity: 0.5;
             font-size: 0.8rem;
@@ -158,33 +166,30 @@
             opacity: 0.8;
         }
         
-        .features-grid {
+        .features-section {
+            display: none;
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .feature-column {
             display: flex;
-            gap: 1.5rem;
+            justify-content: space-between;
             margin-top: 1.5rem;
         }
         
-        .feature-col {
+        .feature-list {
             flex: 1;
         }
         
-        .feature-col h4 {
-            color: var(--text);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--subtle);
-        }
-        
-        .premium-col h4 {
+        .feature-list h4 {
             color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
-        
-        .note {
-            margin-top: 1.5rem;
-            font-style: italic;
-            color: var(--secondary);
-            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -204,10 +209,9 @@
             
             <div id="features" class="policy-section">
                 <h3>Premium Features</h3>
-                <p>Enhance your note-taking with premium features for a one-time $2.99 payment.</p>
-                
-                <div class="features-grid">
-                    <div class="feature-col">
+                <p>Upgrade to premium for $2.99 (one-time payment) to unlock the full potential of noted.</p>
+                <div class="feature-column">
+                    <div class="feature-list">
                         <h4>Free</h4>
                         <ul>
                             <li>Up to 10 notes</li>
@@ -216,8 +220,7 @@
                             <li>Search functionality</li>
                         </ul>
                     </div>
-                    
-                    <div class="feature-col premium-col">
+                    <div class="feature-list">
                         <h4>Premium</h4>
                         <ul>
                             <li>Unlimited notes</li>
@@ -228,8 +231,7 @@
                         </ul>
                     </div>
                 </div>
-                
-                <p class="note">Your purchase also supports the continued development of noted.</p>
+                <p style="margin-top: 1.5rem;">You can also purchase premium as a way to support further development if you enjoy using noted.</p>
             </div>
             
             <div id="refund" class="policy-section">
@@ -263,25 +265,11 @@
         function showPolicy(id) {
             // Hide all policies
             document.querySelectorAll('.policy-section').forEach(el => {
-                el.classList.remove('visible');
-                setTimeout(() => {
-                    if (!el.classList.contains('visible')) {
-                        el.style.display = 'none';
-                    }
-                }, 300);
+                el.style.display = 'none';
             });
             
-            // Show selected policy
-            const selectedPolicy = document.getElementById(id);
-            selectedPolicy.style.display = 'block';
-            
-            // Force reflow
-            void selectedPolicy.offsetWidth;
-            
-            // Add visible class
-            setTimeout(() => {
-                selectedPolicy.classList.add('visible');
-            }, 10);
+            // Show the selected policy
+            document.getElementById(id).style.display = 'block';
         }
     </script>
 </body>
