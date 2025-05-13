@@ -116,6 +116,14 @@
             padding: 2rem;
             border-radius: 8px;
             margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .policy-section.active {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .policy-section h3 {
@@ -166,30 +174,64 @@
             opacity: 0.8;
         }
         
-        .features-section {
-            display: none;
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
-        }
-        
-        .feature-column {
+        .feature-cards {
             display: flex;
             justify-content: space-between;
+            gap: 1.5rem;
             margin-top: 1.5rem;
         }
         
-        .feature-list {
+        .feature-card {
             flex: 1;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--subtle);
         }
         
-        .feature-list h4 {
-            color: var(--accent);
+        .feature-card.premium {
+            border-color: var(--accent);
+            background: rgba(187, 134, 252, 0.05);
+        }
+        
+        .feature-card h4 {
+            color: var(--text);
             margin-bottom: 1rem;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        
+        .feature-card.premium h4 {
+            color: var(--accent);
+        }
+        
+        .feature-card li {
+            margin-bottom: 0.7rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card li:before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-right: 0.6rem;
+            border-radius: 50%;
+            background-color: var(--secondary);
+        }
+        
+        .feature-card.premium li:before {
+            background-color: var(--accent);
+        }
+        
+        .supporting-text {
+            margin-top: 1.8rem;
+            font-style: italic;
+            color: var(--secondary);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -209,9 +251,10 @@
             
             <div id="features" class="policy-section">
                 <h3>Premium Features</h3>
-                <p>Upgrade to premium for $2.99 (one-time payment) to unlock the full potential of noted.</p>
-                <div class="feature-column">
-                    <div class="feature-list">
+                <p>Enhance your note-taking with premium features for a one-time $2.99 payment.</p>
+                
+                <div class="feature-cards">
+                    <div class="feature-card">
                         <h4>Free</h4>
                         <ul>
                             <li>Up to 10 notes</li>
@@ -220,7 +263,8 @@
                             <li>Search functionality</li>
                         </ul>
                     </div>
-                    <div class="feature-list">
+                    
+                    <div class="feature-card premium">
                         <h4>Premium</h4>
                         <ul>
                             <li>Unlimited notes</li>
@@ -231,7 +275,8 @@
                         </ul>
                     </div>
                 </div>
-                <p style="margin-top: 1.5rem;">You can also purchase premium as a way to support further development if you enjoy using noted.</p>
+                
+                <p class="supporting-text">Your purchase also supports the continued development of noted.</p>
             </div>
             
             <div id="refund" class="policy-section">
@@ -263,13 +308,29 @@
     
     <script>
         function showPolicy(id) {
-            // Hide all policies
+            // Hide all policies with animation
             document.querySelectorAll('.policy-section').forEach(el => {
-                el.style.display = 'none';
+                el.classList.remove('active');
+                
+                // Use timeout to wait for fade out before hiding
+                setTimeout(() => {
+                    if (!el.classList.contains('active')) {
+                        el.style.display = 'none';
+                    }
+                }, 400);
             });
             
-            // Show the selected policy
-            document.getElementById(id).style.display = 'block';
+            // Show the selected policy with animation
+            const selectedPolicy = document.getElementById(id);
+            selectedPolicy.style.display = 'block';
+            
+            // Trigger reflow for animation to work
+            void selectedPolicy.offsetWidth;
+            
+            // Add active class for animation
+            setTimeout(() => {
+                selectedPolicy.classList.add('active');
+            }, 10);
         }
     </script>
 </body>
