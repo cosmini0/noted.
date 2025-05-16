@@ -6,32 +6,64 @@
     <title>noted.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #111111;
-            --text: #f1f1f1;
-            --accent: #BB86FC;
-            --subtle: #444444;
-            --secondary: #898989;
+            /* Light theme variables - matching extension */
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            --accent-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --primary-button-bg: #333333;
+            --primary-button-text: #ffffff;
+            --secondary-button-bg: #f0f0f0;
+            --secondary-button-text: #555555;
+            --premium-color: #4CAF50;
+            --premium-text: #ffffff;
+            --delete-color: #d32f2f;
+            --highlight-color: #fffde7;
+            --modal-backdrop: rgba(0, 0, 0, 0.5);
+            --subtle-text: #888888;
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme variables - matching extension */
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --border-color: #2a2a2a;
+            --accent-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --primary-button-bg: #e0e0e0;
+            --primary-button-text: #121212;
+            --secondary-button-bg: #2a2a2a;
+            --secondary-button-text: #e0e0e0;
+            --premium-color: #4CAF50;
+            --premium-text: #ffffff;
+            --delete-color: #ff5252;
+            --highlight-color: #2c2a15;
+            --modal-backdrop: rgba(0, 0, 0, 0.7);
+            --subtle-text: #999999;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
         
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text);
-            background-color: var(--bg);
+            color: var(--text-color);
+            background-color: var(--bg-color);
             -webkit-font-smoothing: antialiased;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            justify-content: center;
         }
         
         #spotlight {
@@ -39,95 +71,173 @@
             margin: 0 auto;
             padding: 2rem;
             text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         #home-center {
-            margin-bottom: 5rem;
+            flex: 1;
         }
         
         #home-title {
-            font-family: 'Unica One', cursive;
+            font-family: 'Inter', sans-serif;
             font-size: 4rem;
-            font-weight: 400;
+            font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--accent);
+            color: var(--text-color);
+            letter-spacing: -1.5px;
         }
         
         #home-subtitle {
             font-weight: 300;
-            color: var(--secondary);
+            color: var(--subtle-text);
             margin-bottom: 3rem;
             font-size: 1.2rem;
         }
         
         #home-nav {
             margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
         }
         
-        #home-nav a {
-            color: var(--text);
+        #home-nav button {
+            color: var(--text-color);
             text-decoration: none;
-            margin: 0 1rem;
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
+            margin: 0 0.6rem;
+            font-size: 14px;
+            transition: opacity 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.7;
+            padding: 5px 10px;
+            border-radius: 6px;
         }
         
-        #home-nav a:hover {
-            color: var(--accent);
+        #home-nav button:hover {
+            opacity: 1;
+            background-color: var(--border-color);
+        }
+        
+        .theme-switch-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .theme-switch {
+            display: none;
+        }
+        
+        .theme-switch-label {
+            display: block;
+            width: 44px;
+            height: 22px;
+            background-color: var(--border-color);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .theme-switch-label:after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s;
+        }
+        
+        .theme-switch:checked + .theme-switch-label:after {
+            transform: translateX(22px);
         }
         
         .cta {
             display: inline-block;
-            color: var(--bg);
-            background-color: var(--accent);
-            padding: 0.6rem 2rem;
-            border-radius: 2rem;
+            color: var(--primary-button-text);
+            background-color: var(--primary-button-bg);
+            padding: 0.7rem 2.5rem;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 500;
             margin-top: 1rem;
-            transition: opacity 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            border: none;
         }
         
         .cta:hover {
             opacity: 0.9;
         }
         
+        .cta:active {
+            transform: scale(0.95);
+        }
+        
         #home-footer {
             font-size: 0.9rem;
-            color: var(--secondary);
+            color: var(--subtle-text);
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--subtle);
+            border-top: 1px solid var(--border-color);
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-sizing: border-box;
+            text-align: center;
         }
         
         #home-footer a {
-            color: var(--secondary);
+            color: var(--subtle-text);
             text-decoration: none;
+            transition: color 0.2s;
         }
         
         #home-footer a:hover {
-            color: var(--accent);
+            color: var(--text-color);
         }
         
         .policy-section {
-            display: none;
+            max-height: 0;
+            overflow: hidden;
             text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 2rem;
-            border-radius: 8px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            margin-top: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease, margin 0.3s ease;
+            box-shadow: 0 1px 4px var(--shadow-color);
+        }
+        
+        .policy-section.active {
+            max-height: 1000px;
+            opacity: 1;
+            transform: translateY(0);
             margin-top: 2rem;
+            padding: 1.5rem;
         }
         
         .policy-section h3 {
-            color: var(--accent);
+            color: var(--text-color);
             margin-bottom: 1rem;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 19px;
         }
         
         .policy-section p, .policy-section li {
-            color: var(--secondary);
-            font-size: 0.9rem;
+            color: var(--text-color);
+            font-size: 14px;
             margin-bottom: 0.8rem;
+            opacity: 0.9;
         }
         
         .policy-section ul {
@@ -135,25 +245,17 @@
             padding-left: 1rem;
         }
         
+        .policy-section ul li {
+            position: relative;
+            padding-left: 0.5rem;
+        }
+        
         .policy-section ul li::before {
-            content: "›";
-            color: var(--accent);
+            content: "•";
+            color: var(--accent-color);
             display: inline-block;
             width: 1rem;
             margin-left: -1rem;
-        }
-        
-        .show-policy {
-            cursor: pointer;
-            color: var(--accent);
-            font-size: 0.9rem;
-            background: none;
-            border: none;
-            margin: 0 0.5rem;
-        }
-        
-        .show-policy:hover {
-            text-decoration: underline;
         }
         
         .subtle-link {
@@ -162,48 +264,77 @@
             margin-top: 0.8rem;
         }
         
-        .subtle-link:hover {
-            opacity: 0.8;
-        }
-        
-        .features-section {
-            display: none;
-            text-align: left;
-            background: rgba(0,0,0,0.2);
-            padding: 2rem;
-            border-radius: 8px;
-            margin-top: 2rem;
+        .subtle-link a:hover {
+            opacity: 1;
         }
         
         .feature-column {
             display: flex;
             justify-content: space-between;
             margin-top: 1.5rem;
+            gap: 2rem;
         }
         
         .feature-list {
             flex: 1;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
         }
         
         .feature-list h4 {
-            color: var(--accent);
+            color: var(--text-color);
             margin-bottom: 1rem;
-            font-size: 1rem;
+            font-size: 16px;
             font-weight: 500;
+        }
+        
+        .premium-badge {
+            background-color: var(--premium-color);
+            color: var(--premium-text);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-left: 6px;
+            font-weight: 500;
+            vertical-align: middle;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <div id="spotlight">
         <div id="home-center">
             <h1 id="home-title">noted.</h1>
             <p id="home-subtitle">Minimal note-taking with web context</p>
             <a href="https://chrome.google.com/webstore/detail/your-extension-id" class="cta">Get Extension</a>
             
+            <div class="theme-switch-container">
+                <input type="checkbox" id="theme-switch" class="theme-switch">
+                <label for="theme-switch" class="theme-switch-label"></label>
+            </div>
+            
             <nav id="home-nav">
-                <button class="show-policy" onclick="showPolicy('features')">Features</button> ·
-                <button class="show-policy" onclick="showPolicy('refund')">Refund</button> ·
-                <button class="show-policy" onclick="showPolicy('terms')">Terms</button> ·
+                <button class="show-policy" onclick="showPolicy('features')">Features</button>
+                <button class="show-policy" onclick="showPolicy('refund')">Refund</button>
+                <button class="show-policy" onclick="showPolicy('terms')">Terms</button>
                 <button class="show-policy" onclick="showPolicy('privacy')">Privacy</button>
             </nav>
             
@@ -221,7 +352,7 @@
                         </ul>
                     </div>
                     <div class="feature-list">
-                        <h4>Premium</h4>
+                        <h4>Premium <span class="premium-badge">PRO</span></h4>
                         <ul>
                             <li>Unlimited notes</li>
                             <li>Copy note content</li>
@@ -262,15 +393,65 @@
     </div>
     
     <script>
+        // Theme switching
+        const themeSwitch = document.getElementById('theme-switch');
+        themeSwitch.addEventListener('change', () => {
+            if (themeSwitch.checked) {
+                document.body.setAttribute('data-theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+        });
+        
+        // Check system preference for dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            themeSwitch.checked = true;
+        }
+        
+        // Toggle policy sections with animation
+        let activeSection = null;
+        
         function showPolicy(id) {
-            // Hide all policies
-            document.querySelectorAll('.policy-section').forEach(el => {
-                el.style.display = 'none';
+            const section = document.getElementById(id);
+            
+            // If clicking the already active section, close it
+            if (activeSection === section) {
+                section.classList.remove('active');
+                activeSection = null;
+                return;
+            }
+            
+            // Close the currently active section if there is one
+            if (activeSection) {
+                activeSection.classList.remove('active');
+            }
+            
+            // Show the selected section
+            section.classList.add('active');
+            activeSection = section;
+            
+            // Scroll to the section
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+        
+        // Add button press effect
+        const buttons = document.querySelectorAll('button, .cta');
+        buttons.forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.97)';
             });
             
-            // Show the selected policy
-            document.getElementById(id).style.display = 'block';
-        }
+            button.addEventListener('mouseup', () => {
+                button.style.transform = '';
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = '';
+            });
+        });
     </script>
 </body>
 </html>
