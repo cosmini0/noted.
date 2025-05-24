@@ -181,20 +181,6 @@
             transform: scale(0.95);
         }
         
-        .ph-badge-container {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .ph-badge-container img {
-            transition: opacity 0.2s;
-        }
-
-        .ph-badge-container:hover img {
-            opacity: 0.9;
-        }
-        
         #home-footer {
             font-size: 0.9rem;
             color: var(--subtle-text);
@@ -217,6 +203,38 @@
         
         #home-footer a:hover {
             color: var(--text-color);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            opacity: 0.5;
+            font-size: 0.8rem;
+            transition: opacity 0.2s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .ph-badge-footer {
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        
+        .ph-badge-footer:hover {
+            opacity: 1;
+        }
+        
+        .ph-badge-footer img {
+            width: 150px;
+            height: 32px;
         }
         
         .policy-section {
@@ -340,12 +358,6 @@
             <p id="home-subtitle">Minimal note-taking with web context</p>
             <a href="https://chromewebstore.google.com/detail/noted/bmaokolehfjcoabndkbkfpglihcabpen" class="cta">Get Extension</a>
             
-            <div class="ph-badge-container">
-                <a href="https://www.producthunt.com/posts/https-cosmini0-github-io-noted?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-https&#0045;cosmini0&#0045;github&#0045;io&#0045;noted" target="_blank">
-                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=969491&theme=light&t=1748085361411" alt="noted on Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" />
-                </a>
-            </div>
-            
             <div class="theme-switch-container">
                 <input type="checkbox" id="theme-switch" class="theme-switch">
                 <label for="theme-switch" class="theme-switch-label"></label>
@@ -408,7 +420,12 @@
         
         <div id="home-footer">
             <p>&copy; 2025 noted. · <a href="mailto:darthvaderh1h1@gmail.com">darthvaderh1h1@gmail.com</a></p>
-            <p class="subtle-link"><a href="https://billing.stripe.com/p/login/fZe14bgrJ1Wt0c8cMM">stripe</a></p>
+            <div class="footer-links">
+                <a href="https://billing.stripe.com/p/login/fZe14bgrJ1Wt0c8cMM">stripe</a>
+                <a href="https://www.producthunt.com/posts/https-cosmini0-github-io-noted?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-https&#0045;cosmini0&#0045;github&#0045;io&#0045;noted" target="_blank" class="ph-badge-footer">
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=969491&theme=dark&t=1748085848271" alt="https&#0058;&#0047;&#0047;cosmini0&#0046;github&#0046;io&#0047;noted&#0046;&#0047; - Take&#0032;notes&#0032;with&#0032;web&#0032;context&#0032;in&#0032;a&#0032;clean&#0032;environment&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" />
+                </a>
+            </div>
         </div>
     </div>
     
