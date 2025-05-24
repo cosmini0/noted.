@@ -181,6 +181,20 @@
             transform: scale(0.95);
         }
         
+        .ph-badge-container {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ph-badge-container img {
+            transition: opacity 0.2s;
+        }
+
+        .ph-badge-container:hover img {
+            opacity: 0.9;
+        }
+        
         #home-footer {
             font-size: 0.9rem;
             color: var(--subtle-text);
@@ -325,6 +339,12 @@
             <h1 id="home-title">noted.</h1>
             <p id="home-subtitle">Minimal note-taking with web context</p>
             <a href="https://chromewebstore.google.com/detail/noted/bmaokolehfjcoabndkbkfpglihcabpen" class="cta">Get Extension</a>
+            
+            <div class="ph-badge-container">
+                <a href="https://www.producthunt.com/posts/https-cosmini0-github-io-noted?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-https&#0045;cosmini0&#0045;github&#0045;io&#0045;noted" target="_blank">
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=969491&theme=light&t=1748085361411" alt="noted on Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" />
+                </a>
+            </div>
             
             <div class="theme-switch-container">
                 <input type="checkbox" id="theme-switch" class="theme-switch">
